@@ -66,9 +66,12 @@ fn main() -> Result<(), ProgramError> {
     thread::sleep(Duration::from_secs(5));
 
     let mut rng = ChaCha20Rng::from_rng(&mut ThreadRng::default());
+
+    let mut random_loops = rng.gen_range(30..=50);
+
     let mut random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
 
-    for i in 0..50 {
+    for i in 0..random_loops {
         random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
 
         warn!("{}: {}", i + 1, random_person);
@@ -81,7 +84,7 @@ fn main() -> Result<(), ProgramError> {
 
     let mut random_option = victims.options.choose(&mut rng).ok_or(ProgramError::EmptyOptionsListError)?;
 
-    for i in 0..50 {
+    for i in 0..random_loops {
         random_option = victims.options.choose(&mut rng).ok_or(ProgramError::EmptyOptionsListError)?;
 
         warn!("{}: {}", i + 1, random_option);
