@@ -69,20 +69,21 @@ fn main() -> Result<(), ProgramError> {
     for i in 0..50 {
         random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
 
-        thread::sleep(Duration::from_millis(((1000*50)/50)/(i+1)));
         warn!("{}: {}", i + 1, random_person);
+        thread::sleep(Duration::from_millis(((3000*50)/50)/(50-(i))));
     }
 
     info!("Selected victim: {}", random_person);
+
+    thread::sleep(Duration::from_secs(5));
 
     let mut random_option = victims.options.choose(&mut rng).ok_or(ProgramError::EmptyOptionsListError)?;
 
     for i in 0..50 {
         random_option = victims.options.choose(&mut rng).ok_or(ProgramError::EmptyOptionsListError)?;
 
-        thread::sleep(Duration::from_millis(((1000*50)/50)/(i+1)));
-
         warn!("{}: {}", i + 1, random_option);
+        thread::sleep(Duration::from_millis(((3000*50)/50)/(50-(i))));
     }
 
     info!("Selected option: {}", random_option);
