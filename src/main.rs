@@ -1,6 +1,7 @@
 use std::fs;
 
 use log::{error, info};
+use serde::Deserialize;
 
 #[derive(thiserror::Error, Debug)]
 enum ProgramError {
@@ -9,6 +10,15 @@ enum ProgramError {
 
     #[error("Available entropy is too low for trusted operations.")]
     LowEntropyError,
+
+    #[error("Error parsing victims.json file, please check if the file is valid JSON and the structure is correct: {0}")]
+    VictimsParsingError(#[from] serde_json::Error),
+}
+
+#[derive(Debug, Deserialize)]
+struct Victims {
+    persons: Vec<String>,
+    options: Vec<String>,
 }
 
 fn main() -> Result<(), ProgramError> {
@@ -34,7 +44,7 @@ fn main() -> Result<(), ProgramError> {
 
     info!("Entropy level is safe, proceeding with calculations.");
 
-    
+    let victims: Victims = serde_json::from_str(&fs::read_to_string("victims.json")?)?;
 
     Ok(())
 }
