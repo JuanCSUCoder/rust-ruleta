@@ -74,7 +74,7 @@ fn main() -> Result<(), ProgramError> {
     for i in 0..random_loops {
         random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
 
-        warn!("{}", i + 1, random_person);
+        warn!("{}", random_person);
         thread::sleep(Duration::from_millis(((3000*random_loops)/random_loops)/(random_loops-(i))));
     }
 
@@ -87,7 +87,7 @@ fn main() -> Result<(), ProgramError> {
     for i in 0..random_loops {
         random_option = victims.options.choose(&mut rng).ok_or(ProgramError::EmptyOptionsListError)?;
 
-        warn!("{}", i + 1, random_option);
+        warn!("{}", random_option);
         thread::sleep(Duration::from_millis(((3000*random_loops)/random_loops)/(random_loops-(i))));
     }
 
