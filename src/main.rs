@@ -1,7 +1,7 @@
 use std::{fs, thread, time::Duration};
 
 use log::{error, info, warn};
-use rand::{SeedableRng, rngs::{ChaCha20Rng, ThreadRng}, seq::IndexedRandom};
+use rand::{RngExt, SeedableRng, rngs::{ChaCha20Rng, ThreadRng}, seq::IndexedRandom};
 use serde::Deserialize;
 
 #[derive(thiserror::Error, Debug)]
@@ -67,7 +67,7 @@ fn main() -> Result<(), ProgramError> {
 
     let mut rng = ChaCha20Rng::from_rng(&mut ThreadRng::default());
 
-    let mut random_loops = rng.gen_range(30..=50);
+    let mut random_loops = rng.random_range(30..=50);
 
     let mut random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
 
