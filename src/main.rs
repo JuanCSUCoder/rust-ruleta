@@ -63,6 +63,8 @@ fn main() -> Result<(), ProgramError> {
 
     info!("Entropy level is safe, proceeding with calculations.");
 
+    thread::sleep(Duration::from_secs(5));
+
     let mut rng = ChaCha20Rng::from_rng(&mut ThreadRng::default());
     let mut random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
 
