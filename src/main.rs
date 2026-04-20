@@ -24,6 +24,18 @@ struct Victims {
 fn main() -> Result<(), ProgramError> {
     tracing_subscriber::fmt::init();
 
+    let victims: Victims = serde_json::from_str(&fs::read_to_string("victims.json")?)?;
+
+    info!("Loaded victims =====================");
+    victims.persons.iter().for_each(|person| {
+        info!("Victim: {}", person);
+    });
+
+    info!("Loaded options =====================");
+    victims.options.iter().for_each(|option| {
+        info!("Option: {}", option);
+    });
+
     // Read the current available entropy in bits
     let entropy = fs::read_to_string("/proc/sys/kernel/random/entropy_avail")?;
     
@@ -43,18 +55,6 @@ fn main() -> Result<(), ProgramError> {
     }
 
     info!("Entropy level is safe, proceeding with calculations.");
-
-    let victims: Victims = serde_json::from_str(&fs::read_to_string("victims.json")?)?;
-
-    info!("Loaded victims =====================");
-    victims.persons.iter().for_each(|person| {
-        info!("Victim: {}", person);
-    });
-
-    info!("Loaded options =====================");
-    victims.options.iter().for_each(|option| {
-        info!("Option: {}", option);
-    });
 
     Ok(())
 }
