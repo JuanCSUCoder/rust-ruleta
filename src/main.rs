@@ -1,6 +1,7 @@
 use std::fs;
 
-use log::{error, info};
+use log::{error, info, warn};
+use rand::{SeedableRng, rngs::{ChaCha20Rng, ThreadRng}, seq::IndexedRandom};
 use serde::Deserialize;
 
 #[derive(thiserror::Error, Debug)]
@@ -13,6 +14,12 @@ enum ProgramError {
 
     #[error("Error parsing victims.json file, please check if the file is valid JSON and the structure is correct: {0}")]
     VictimsParsingError(#[from] serde_json::Error),
+
+    #[error("Error: victims list is empty.")]
+    EmptyVictimsListError,
+
+    #[error("Error: options list is empty.")]
+    EmptyOptionsListError,
 }
 
 #[derive(Debug, Deserialize)]
@@ -55,6 +62,27 @@ fn main() -> Result<(), ProgramError> {
     }
 
     info!("Entropy level is safe, proceeding with calculations.");
+
+    let mut rng = ChaCha20Rng::from_rng(&mut ThreadRng::default());
+    let mut random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
+
+    for i in 0..50 {
+        random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
+
+        warn!("{}: {}", i + 1, random_person);
+    }
+
+    info!("Selected victim: {}", random_person);
+
+    let mut random_option = victims.options.choose(&mut rng).ok_or(ProgramError::EmptyOptionsListError)?;
+
+    for i in 0..50 {
+        random_option = victims.options.choose(&mut rng).ok_or(ProgramError::EmptyOptionsListError)?;
+
+        warn!("{}: {}", i + 1, random_option);
+    }
+
+    info!("Selected option: {}", random_option);
 
     Ok(())
 }
