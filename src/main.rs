@@ -1,4 +1,4 @@
-use std::fs;
+use std::{fs, thread, time::Duration};
 
 use log::{error, info, warn};
 use rand::{SeedableRng, rngs::{ChaCha20Rng, ThreadRng}, seq::IndexedRandom};
@@ -69,6 +69,7 @@ fn main() -> Result<(), ProgramError> {
     for i in 0..50 {
         random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
 
+        thread::sleep(Duration::from_millis((1000*50)/(i+1)));
         warn!("{}: {}", i + 1, random_person);
     }
 
@@ -78,6 +79,8 @@ fn main() -> Result<(), ProgramError> {
 
     for i in 0..50 {
         random_option = victims.options.choose(&mut rng).ok_or(ProgramError::EmptyOptionsListError)?;
+
+        thread::sleep(Duration::from_millis((1000*50)/(i+1)));
 
         warn!("{}: {}", i + 1, random_option);
     }
