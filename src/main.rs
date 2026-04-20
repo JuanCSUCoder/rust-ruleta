@@ -46,5 +46,15 @@ fn main() -> Result<(), ProgramError> {
 
     let victims: Victims = serde_json::from_str(&fs::read_to_string("victims.json")?)?;
 
+    info!("Loaded victims =====================");
+    victims.persons.iter().for_each(|person| {
+        info!("Victim: {}", person);
+    });
+
+    info!("Loaded options =====================");
+    victims.options.iter().for_each(|option| {
+        info!("Option: {}", option);
+    });
+
     Ok(())
 }
