@@ -93,5 +93,7 @@ fn main() -> Result<(), ProgramError> {
 
     info!("Selected option: {}", random_option);
 
+    info!("Final decision: {} should {}", random_person, random_option);
+
     Ok(())
 }
