@@ -2,22 +2,18 @@
     "persons": [
         "Alejandro",
         "Juan Camilo",
-        "David Santiago",
         "Juanes",
-        "Marco",
-        "Naher",
-        "David Andrés"
+        "Marco"
     ],
     "options": [
         "Buñuelos",
         "Helado",
         "Fusion",
-        "Empanadas",
         "Churros",
         "Se salva",
         "Picada",
+        "Revivir",
         "Comodin",
-        "Donas",
         "Pizza",
         "Delegar"
     ]
