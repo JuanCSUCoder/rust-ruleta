@@ -78,7 +78,7 @@ fn main() -> Result<(), ProgramError> {
         thread::sleep(Duration::from_millis(((3000*random_loops)/random_loops)/(random_loops-(i))));
     }
 
-    info!("Selected victim: {}", random_person);
+    info!("Le toca invitar a: {}", random_person);
 
     thread::sleep(Duration::from_secs(5));
 
@@ -91,9 +91,9 @@ fn main() -> Result<(), ProgramError> {
         thread::sleep(Duration::from_millis(((3000*random_loops)/random_loops)/(random_loops-(i))));
     }
 
-    info!("Selected option: {}", random_option);
+    info!("Le toca: {}", random_option);
 
-    info!("Final decision: {} should {}", random_person, random_option);
+    info!("Decisión final: {} le toca {}", random_person, random_option);
 
     Ok(())
 }
