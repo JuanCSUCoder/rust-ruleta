@@ -1,14 +1,19 @@
 {
     "persons": [
         "Alejandro",
+        "Juan Camilo",
+        "Juan Pablo",
         "Juanes",
         "Marco",
         "Naher",
         "David Andrés",
+        "David Santiago",
         "Free for all",
         "Votación"
     ],
     "options": [
+        "Buñuelos",
+        "Picada",
         "Helado",
         "Fusion",
         "Churros",
