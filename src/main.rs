@@ -67,7 +67,7 @@ fn main() -> Result<(), ProgramError> {
 
     let mut rng = ChaCha20Rng::from_rng(&mut ThreadRng::default());
 
-    let mut random_loops = rng.random_range(30..=50);
+    let random_loops = rng.random_range(30..=50);
 
     let mut random_person = victims.persons.choose(&mut rng).ok_or(ProgramError::EmptyVictimsListError)?;
 
